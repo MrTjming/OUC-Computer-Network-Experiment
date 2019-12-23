@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/RDT40/SendWindow.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/RDT40/TCP_Sender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test/CheckSum.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test/ReceiveWindow.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test/SendWindow.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test/TCP_Receiver.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test/TCP_Sender.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test2/ReceiveWindow.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test2/SendWindow.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test2/TCP_Receiver.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/ouc/tcp/test2/TCP_Sender.java" charset="GBK" />
+  </component>
+</project>
