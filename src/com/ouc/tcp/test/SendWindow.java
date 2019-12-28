@@ -124,23 +124,28 @@ public class SendWindow {
 
 	private void sendWindow(Window window){
 		//发送数据报
-		sendWindow(window,true);
+		sendWindow(window,0);
 	}
 
-	private void sendWindow(Window window,boolean isFirst){
+	private void sendWindow(Window window,int type){
 		//发送数据报
 		window.startSendTime=System.currentTimeMillis();
-		send(window.packet,isFirst);
+		send(window.packet,type);
 	}
 
-	private void send(TCP_PACKET stcpPack,boolean isFirst){
+	private void send(TCP_PACKET stcpPack,int type){
 		//发送数据报
-
 		client.send(stcpPack);
-		if(isFirst){
-			logger.info("首次发送包:"+stcpPack.getTcpH().getTh_seq());
-		}else{
-			logger.warning("重新发送包:"+stcpPack.getTcpH().getTh_seq());
+		switch (type){
+			case 0:
+				logger.info("[首次]发送包,seq:"+stcpPack.getTcpH().getTh_seq()+" index"+indexMap.get(stcpPack.getTcpH().getTh_seq()));
+				break;
+			case 1:
+				logger.warning("[超时]发送包,seq::"+stcpPack.getTcpH().getTh_seq()+" index"+indexMap.get(stcpPack.getTcpH().getTh_seq()));
+				break;
+			case 2:
+				logger.warning("[快重]发送包,seq::"+stcpPack.getTcpH().getTh_seq()+" index"+indexMap.get(stcpPack.getTcpH().getTh_seq()));
+				break;
 		}
 	}
 
@@ -160,11 +165,8 @@ public class SendWindow {
 					if (TIMEOUTTIME < (System.currentTimeMillis() - window.getStartSendTime())) {
 						//  它没有收到ack,则尝试重发
 						if (!window.isAck()) {
-							logger.warning(getWindowInfo()+"超时重发包:");
-							sendWindow(sendContent.get(index),false);
+							sendWindow(sendContent.get(index),1);
 							break;
-						}else{
-							startWindowIndex=index+1;
 						}
 					}
 					index++;
@@ -177,46 +179,40 @@ public class SendWindow {
 
 	public void recv(TCP_PACKET recvPack){
 		boolean isBadNet = false;
-
+		Window window = null;
 		int ackNum=recvPack.getTcpH().getTh_ack();
 		logger.info("接收到ack:"+ackNum);
 
 		int ackIndex=indexMap.get(ackNum);
-		if(ackIndex<startWindowIndex){
-			logger.warning("收到延迟ack包,ackIndex值:"+ackIndex);
-			return;
-		}
+		if(ackIndex>=startWindowIndex){
+			// 如果收到的不是延迟到达的包,则处理
+			int tempSeq;
+			int index=startWindowIndex;
 
-		startWindowIndex=Math.max(ackIndex,startWindowIndex);
+			// 当滑动窗口还有空间
+			for (; index <=ackWindowIndex ; index++) {
+				window=sendContent.get(index);
+				tempSeq=window.packet.getTcpH().getTh_seq();
 
-		Window window = null;
-		int tempSeq;
-		int index=startWindowIndex;
+				// 包里的ack 大于滑动窗口里Index下标对应包的窗口的话,说明前面的也收到了
+				if (ackIndex >= indexMap.get(tempSeq)) {
+					logger.info(getWindowInfo()+"接收到ackNum:"+tempSeq+" (大于当前)index为:"+index+"的窗口块已经ack");
+					window.setAck(true);
+				} else {
+					// 该窗口的ack数量+1
+					window.setDuplicateAckNum(window.getDuplicateAckNum() + 1);
 
-		// 当滑动窗口还有空间
-		for (; index <=ackWindowIndex ; index++) {
-			window=sendContent.get(index);
-			tempSeq=window.packet.getTcpH().getTh_seq();
-
-			// 包里的ack 大于滑动窗口里Index下标对应包的窗口的话,说明前面的也收到了
-			if (ackIndex >= indexMap.get(tempSeq)) {
-				logger.info(getWindowInfo()+"接收到ackNum:"+tempSeq+" (大于当前)index为:"+index+"的窗口块已经ack");
-				window.setAck(true);
-//			} else if ((ack == tempSeq)) {
-			} else {
-				// 该窗口的ack数量+1
-				window.setDuplicateAckNum(window.getDuplicateAckNum() + 1);
-
-				// 如果该包收到3次ack时,说明网络拥塞
-				if ((window.getDuplicateAckNum() >= MAX_Duplicate_NUM)&&(!window.isAck())) {
-					isBadNet = true;
+					// 如果该包收到3次ack时,说明网络拥塞
+					if ((window.getDuplicateAckNum() >= MAX_Duplicate_NUM)&&(!window.isAck())) {
+						isBadNet = true;
+					}
+					break;
 				}
-				break;
 			}
+			updateWindowSize(ackIndex);
+		}else{
+			logger.warning("收到延迟ack包,ackIndex值:"+ackIndex);
 		}
-
-		startWindowIndex = ackIndex;
-		endWindosIndex = startWindowIndex + cwnd;
 
 		if (isBadNet) {
 			// 如果有包被重复收到MAX_Duplicate_NUM次以上,说明网络不咋地,缩小窗口
@@ -238,9 +234,8 @@ public class SendWindow {
 			// 快速重传
 			if (cwnd != -1) {
 				updateWindowSize(ackIndex);
-				logger.warning("快速重传:");
 				window.setDuplicateAckNum(0);
-				sendWindow(window,false);
+				sendWindow(window,2);
 			}
 		}else {
 			// 网络状况良好,增大滑动窗口

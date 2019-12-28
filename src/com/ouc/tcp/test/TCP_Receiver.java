@@ -38,12 +38,10 @@ public class TCP_Receiver extends TCP_Receiver_ADT {
 			ackPack = new TCP_PACKET(tcpH, tcpS, recvPack.getSourceAddr());
 			tcpH.setTh_sum(CheckSum.computeChkSum(ackPack));
 			ackPack.setTcpH(tcpH);
-
 			//回复ACK报文段
 			reply(ackPack);
 		}else{
 			System.out.println("校验和不匹配,传输发送错误");
-//			needSeq=window.calcRcvBase();
 		}
 
 

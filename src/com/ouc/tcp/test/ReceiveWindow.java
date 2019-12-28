@@ -3,10 +3,7 @@ package com.ouc.tcp.test;
 import com.ouc.tcp.client.Client;
 import com.ouc.tcp.message.TCP_PACKET;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.FileHandler;
@@ -60,20 +57,22 @@ public class ReceiveWindow {
 	}
 
 	Logger logger;
-	SortedSet<Window> recvContent;
-	int recvBase=0;
+	SortedSet<TCP_PACKET> recvBuffer;
+	LinkedList<TCP_PACKET> contentList;
+	int lastLength=0;
 	Client client;
 	int lastSaveSeq=-1;
 	public ReceiveWindow(Client client) {
 		initLogger();
 		this.client=client;
 
-		recvContent=new TreeSet<Window>(new Comparator<Window>() {
+		recvBuffer=new TreeSet<TCP_PACKET>(new Comparator<TCP_PACKET>() {
 			@Override
-			public int compare(Window o1, Window o2) {
-				return o1.packet.getTcpH().getTh_seq()-o2.packet.getTcpH().getTh_seq();
+			public int compare(TCP_PACKET o1, TCP_PACKET o2) {
+				return o1.getTcpH().getTh_seq()-o2.getTcpH().getTh_seq();
 			}
 		});
+		contentList =new LinkedList<>();
 	}
 
 	private void initLogger(){
@@ -92,64 +91,56 @@ public class ReceiveWindow {
 
 	public int addRecvPacket(TCP_PACKET packet){
 		int seq=packet.getTcpH().getTh_seq();
-		// 计算接收窗口左沿
-		int rcvBase=calcRcvBase();
-		if(seq==rcvBase+100 || lastSaveSeq==-1){
+		if(seq==lastSaveSeq+lastLength || lastSaveSeq==-1){
+			lastLength=packet.getTcpS().getData().length;
 			lastSaveSeq=seq;
-			recvContent.add(new Window(packet));
-
-			waitWrite(packet);
-			rcvBase=lastSaveSeq;
-			logger.info("有序接收,缓存seq:"+seq+"到列表,返回ack:"+rcvBase);
-		}else if(seq>rcvBase){
-			recvContent.add(new Window(packet));
-			logger.info("失序接收,缓存seq:"+seq+"到列表,返回ack:"+rcvBase);
+			contentList.add(packet);
+			waitWrite();
+			logger.info("有序接收,缓存seq:"+seq+"到列表,返回ack:"+lastSaveSeq);
+		}else if(seq>lastSaveSeq){
+			recvBuffer.add(packet);
+			logger.info("失序接收,缓存seq:"+seq+"到列表,返回ack:"+lastSaveSeq);
 		}
-
-		//recvBase=rcvBase;
-
-
-		return rcvBase;
+		return lastSaveSeq;
 
 	}
 
-	public void waitWrite(TCP_PACKET packet){
-		int seq=packet.getTcpH().getTh_seq();
-
+	public void waitWrite(){
 		File fw = new File("recvData.txt");
 		BufferedWriter writer;
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		try {
-			writer = new BufferedWriter(new FileWriter(fw, true));
-			Window window;
-			int[] data=packet.getTcpS().getData();
-			for(int i = 0; i < data.length; i++) {
-				writer.write(data[i] + "\n");
-			}
-			writer.flush();		//清空输出缓存
-			Iterator<Window> it=recvContent.iterator();
-			it.next();
-			it.remove();
-			while (it.hasNext()){
-				window=it.next();
-				seq=window.packet.getTcpH().getTh_seq();
-				if((seq<=lastSaveSeq+100)&&(seq>lastSaveSeq)){// 判断是否有序
-					data=window.packet.getTcpS().getData();
-					lastSaveSeq=seq;
-					logger.info("连续写入,seq:"+seq+"\n");
-					for(int i = 0; i < data.length; i++) {
-						writer.write(data[i] + "\n");
+			if(!this.recvBuffer.isEmpty()){
+				Iterator<TCP_PACKET> it=this.recvBuffer.iterator();
+				TCP_PACKET packet;
+				int nowSeq;
+				while (it.hasNext()){
+					packet=it.next();
+					nowSeq=packet.getTcpH().getTh_seq();
+					if(nowSeq==lastSaveSeq+lastLength){
+						lastLength=packet.getTcpS().getData().length;
+						lastSaveSeq=nowSeq;
+						contentList.add(packet);
+						it.remove();
+					}else{
+						break;
 					}
-					writer.flush();		//清空输出缓存
-					it.remove();
 				}
-				else{
-//					System.out.println("退出循环,当前seq为:"+seq+" last:"+lastSaveSeq);
-					break;
+			}
+
+
+			int[] data;
+			Iterator<TCP_PACKET> it= contentList.iterator();
+			writer = new BufferedWriter(new FileWriter(fw, true));
+			while (it.hasNext()){
+				data=it.next().getTcpS().getData();
+				for(int i = 0; i < data.length; i++) {
+					writer.write(data[i] + "\n");
 				}
+				it.remove();
+				writer.flush();		//清空输出缓存
 			}
 			writer.close();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

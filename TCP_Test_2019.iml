@@ -15,6 +15,7 @@
       <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDT2_2" />
       <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDT3_0" />
       <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDT4_0" />
+      <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/test" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />

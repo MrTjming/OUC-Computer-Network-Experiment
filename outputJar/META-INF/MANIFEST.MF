@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.ouc.RDTbyUDP.test.Receiver
+Class-Path: junit-4.12.jar TCP_Win_TestSys.jar
+

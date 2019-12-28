@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Receiver:jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts/Receiver_jar</output-path>
+    <root id="archive" name="TCP_Test_2019.jar">
+      <element id="module-output" name="TCP_Test_2019" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/TCP_Win_TestSys.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
