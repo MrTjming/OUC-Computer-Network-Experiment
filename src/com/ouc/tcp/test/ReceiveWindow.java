@@ -72,7 +72,7 @@ public class ReceiveWindow {
 				return o1.getTcpH().getTh_seq()-o2.getTcpH().getTh_seq();
 			}
 		});
-		contentList =new LinkedList<>();
+		contentList =new LinkedList<TCP_PACKET>();
 	}
 
 	private void initLogger(){
@@ -102,7 +102,6 @@ public class ReceiveWindow {
 			logger.info("失序接收,缓存seq:"+seq+"到列表,返回ack:"+lastSaveSeq);
 		}
 		return lastSaveSeq;
-
 	}
 
 	public void waitWrite(){

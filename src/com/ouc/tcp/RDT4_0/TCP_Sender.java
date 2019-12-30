@@ -68,10 +68,7 @@ public class TCP_Sender extends TCP_Sender_ADT {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		};
-
-		//等待ACK报文
-		//waitACK();
+		}
 	}
 	
 	@Override
@@ -119,17 +116,8 @@ public class TCP_Sender extends TCP_Sender_ADT {
 		if(CheckSum.computeChkSum(recvPack)==recvPack.getTcpH().getTh_sum()){
 			sendWindow.recv(recvPack);
 		}else{
-
 			System.out.println("接收到的ack出错");
 		}
-//		sendWindow.recv(recvPack);
-
-//		System.out.println("Receive ACK Number： "+ recvPack.getTcpH().getTh_ack());
-//		ackQueue.add(recvPack.getTcpH().getTh_ack());
-//	    System.out.println();
-
-
-	   
 	}
 
 

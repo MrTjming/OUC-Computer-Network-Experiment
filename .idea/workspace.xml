@@ -78,7 +78,7 @@
       <recent name="F:\learnAbout\计算机网络\Lab\TCP_Test_2019\src\com\ouc\tcp\RDT40" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Sender">
+  <component name="RunManager" selected="Application.TestRun">
     <configuration name="Receiver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ouc.RDTbyUDP.test.Receiver" />
       <module name="TCP_Test_2019" />
@@ -124,6 +124,136 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ouc.tcp.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDP2_2.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDP2_2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT3_0.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDT3_0.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT4_0.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDT4_0.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT2_2.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDT2_2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT2_0.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDT2_0.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT20.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDT20.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.rdt4_0.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.rdt4_0.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.Final.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.Final.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT4_0.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDT4_0.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT4_0.TestRun" />
+      <module name="TCP_Test_2019" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ouc.tcp.RDT4_0.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -235,102 +365,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT2_2.TestRun" />
-      <module name="TCP_Test_2019" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ouc.tcp.RDT2_2.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT2_0.TestRun" />
-      <module name="TCP_Test_2019" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ouc.tcp.RDT2_0.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT20.TestRun" />
-      <module name="TCP_Test_2019" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ouc.tcp.RDT20.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.rdt4_0.TestRun" />
-      <module name="TCP_Test_2019" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ouc.tcp.rdt4_0.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.Final.TestRun" />
-      <module name="TCP_Test_2019" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ouc.tcp.Final.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT4_0.TestRun" />
-      <module name="TCP_Test_2019" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ouc.tcp.RDT4_0.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestRun" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ouc.tcp.RDT4_0.TestRun" />
-      <module name="TCP_Test_2019" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ouc.tcp.RDT4_0.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Sender" />
         <item itemvalue="Application.TestRun" />
-        <item itemvalue="Application.Receiver" />
+        <item itemvalue="Application.TestRun (2)" />
+        <item itemvalue="Application.TestRun (2)" />
+        <item itemvalue="Application.TestRun (2)" />
+        <item itemvalue="Application.Sender" />
       </list>
     </recent_temporary>
   </component>
@@ -368,7 +409,8 @@
       <workItem from="1577099402812" duration="9132000" />
       <workItem from="1577153347259" duration="12287000" />
       <workItem from="1577167559202" duration="33458000" />
-      <workItem from="1577453215765" duration="4499000" />
+      <workItem from="1577453215765" duration="5499000" />
+      <workItem from="1577606084281" duration="13550000" />
     </task>
     <servers />
   </component>
@@ -400,34 +442,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1577263733446" />
-    <state width="1877" height="220" key="GridCell.Tab.0.bottom" timestamp="1577498611310">
+    <state width="1877" height="424" key="GridCell.Tab.0.bottom" timestamp="1577705223785">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="220" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1577498611310" />
-    <state width="1877" height="220" key="GridCell.Tab.0.center" timestamp="1577498611309">
+    <state width="1877" height="424" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1577705223785" />
+    <state width="1877" height="424" key="GridCell.Tab.0.center" timestamp="1577705223784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="220" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1577498611309" />
-    <state width="1877" height="220" key="GridCell.Tab.0.left" timestamp="1577498611309">
+    <state width="1877" height="424" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1577705223784" />
+    <state width="1877" height="424" key="GridCell.Tab.0.left" timestamp="1577705223784">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="220" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1577498611309" />
-    <state width="1877" height="220" key="GridCell.Tab.0.right" timestamp="1577498611309">
+    <state width="1877" height="424" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1577705223784" />
+    <state width="1877" height="424" key="GridCell.Tab.0.right" timestamp="1577705223785">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="220" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1577498611309" />
-    <state x="226" y="239" width="1284" height="718" key="SettingsEditor" timestamp="1577453261029">
+    <state width="1877" height="424" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1577705223785" />
+    <state x="226" y="239" width="1284" height="718" key="SettingsEditor" timestamp="1577690294779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="226" y="239" width="1284" height="718" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1577453261029" />
+    <state x="226" y="239" width="1284" height="718" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1577690294779" />
     <state x="789" y="378" key="classpath-attribute-editor" timestamp="1577264197297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="789" y="378" key="classpath-attribute-editor/0.0.1920.1040@0.0.1920.1040" timestamp="1577264197297" />
-    <state x="658" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1577153386419">
+    <state x="658" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1577606091350">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="658" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577153386419" />
+    <state x="658" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1577606091350" />
     <state x="644" y="258" width="632" height="524" key="find.popup" timestamp="1577172850694">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

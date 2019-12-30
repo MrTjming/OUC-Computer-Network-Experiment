@@ -40,9 +40,6 @@ public class TCP_Receiver extends TCP_Receiver_ADT {
 			System.out.println("校验和不匹配,传输错误");
 		}
 
-		//交付数据（每20组数据交付一次）
-//		if(dataQueue.size() == 20)
-//			deliver_data();
 	}
 
 	@Override

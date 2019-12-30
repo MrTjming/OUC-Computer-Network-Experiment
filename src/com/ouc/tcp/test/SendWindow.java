@@ -57,13 +57,11 @@ public class SendWindow {
 	int startWindowIndex; // 滑动窗口头
 	int ackWindowIndex; // 已发送的最大位置
 	int endWindosIndex; // 滑动窗口尾
-	int cwnd =1; //滑动窗口大小
+	int cwnd =1; //滑动窗口大小,慢开始
 	HashMap<Integer,Integer> indexMap;
 	Client client;
 
 	int ssthresh = 16; // 慢开始的门限
-	float betaValue = 0.5F;
-	boolean canSend=true;
 	final private static int MAX_Duplicate_NUM = 3;
 	final private static int MAX_Window_Size = 100;
 
@@ -215,43 +213,31 @@ public class SendWindow {
 		}
 
 		if (isBadNet) {
-			// 如果有包被重复收到MAX_Duplicate_NUM次以上,说明网络不咋地,缩小窗口
-			if (ssthresh > 0 && cwnd > 0) {
-				int oldSsthresh=ssthresh;
-				ssthresh = (cwnd / 2);
-				if (ssthresh < 2) {
-					ssthresh = 2;
-				}
-				// TCP Tahoe方式
-				// cwnd = 1;
+			// 拥塞避免 如果有包被重复收到MAX_Duplicate_NUM次以上,说明网络不好,缩小窗口
+			int oldSsthresh=ssthresh;
+			ssthresh = Math.max((cwnd / 2),2);
+			// TCP Tahoe方式
+			// cwnd = 1;
 
-				// TCP Reno方式
-				cwnd=oldSsthresh+1;
+			// TCP Reno方式
+			cwnd=oldSsthresh+1;
 
-				logger.warning(String.format(getWindowInfo()+"网络拥挤,设置新门限:%d, 当前窗口范围(%d,%d),acknum=%d\n", ssthresh,startWindowIndex,endWindosIndex,ackWindowIndex));
-			}
+			updateWindowSize(ackIndex);
+			logger.warning(String.format(getWindowInfo()+"网络拥挤,设置新门限:%d,阻塞窗口大小为:%d, 当前窗口范围(%d,%d),acknum=%d\n", ssthresh,cwnd,startWindowIndex,endWindosIndex,ackWindowIndex));
 
 			// 快速重传
-			if (cwnd != -1) {
-				updateWindowSize(ackIndex);
-				window.setDuplicateAckNum(0);
-				sendWindow(window,2);
-			}
+			window.setDuplicateAckNum(0);
+			sendWindow(window,2);
+
 		}else {
 			// 网络状况良好,增大滑动窗口
-			if ((ssthresh > 0) && (cwnd > 0)) {
-				if (cwnd <= ssthresh) {
-					cwnd *= 2;
-				} else {
-					// 加法增大
-					cwnd += 1;
-				}
-				if(cwnd>MAX_Window_Size){
-					cwnd=MAX_Window_Size;
-				}
-				updateWindowSize(ackIndex);
-				logger.info(String.format(getWindowInfo()+"网络良好,设置阻塞窗口大小:%d, 当前窗口范围(%d,%d),acknum=%d\n", cwnd,startWindowIndex,endWindosIndex,ackWindowIndex));
+			cwnd=(cwnd <= ssthresh)?cwnd*2:cwnd+1;// 指数增长/加法增长
+			if(cwnd>MAX_Window_Size){
+				cwnd=MAX_Window_Size;
 			}
+			updateWindowSize(ackIndex);
+			logger.info(String.format(getWindowInfo()+"网络良好,设置阻塞窗口大小:%d, 当前窗口范围(%d,%d),ackWindowIndex=%d\n", cwnd,startWindowIndex,endWindosIndex,ackWindowIndex));
+
 		}
 
 	}

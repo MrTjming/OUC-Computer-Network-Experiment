@@ -11,11 +11,11 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/RDTbyUDP/test" />
+      <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDP2_2" />
       <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDT2_0" />
-      <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDT2_2" />
       <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDT3_0" />
       <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/RDT4_0" />
-      <excludeFolder url="file://$MODULE_DIR$/src/com/ouc/tcp/test" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />

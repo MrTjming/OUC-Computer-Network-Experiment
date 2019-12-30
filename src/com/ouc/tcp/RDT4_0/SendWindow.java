@@ -120,7 +120,6 @@ public class SendWindow {
 					// 如果第index个包超时了
 					window = sendContent.get(index);
 					if(updateStart && window.ack){
-						//System.out.println("index为:"+index+"的窗口块已经ack,(start is"+startWindowIndex+"  endWindow is"+endWindosIndex);
 						startWindowIndex=index+1;
 						logger.info("更新start值:"+startWindowIndex);
 					}else if(!window.ack){
