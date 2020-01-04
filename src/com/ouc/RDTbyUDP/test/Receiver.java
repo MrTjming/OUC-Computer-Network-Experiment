@@ -1,19 +1,27 @@
 package com.ouc.RDTbyUDP.test;
 import java.io.*;
 import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Receiver implements Runnable {
     class ClientAddr{
         InetAddress addr;
         int port;
 
+        public ClientAddr() {
+        }
+
         public ClientAddr(InetAddress addr, int port) {
             this.addr = addr;
             this.port = port;
         }
+
+        public ClientAddr(ClientAddr c) {
+            this.addr = c.addr;
+            this.port = c.port;
+        }
+
 
         @Override
         public boolean equals(Object o) {
@@ -26,7 +34,12 @@ public class Receiver implements Runnable {
 
         @Override
         public int hashCode() {
-            return Objects.hash(addr, port);
+            return Objects.hash(addr.toString(), port);
+        }
+
+        public void update(InetAddress addr, int port){
+            this.addr = addr;
+            this.port = port;
         }
     }
     int listen_port;
@@ -40,7 +53,7 @@ public class Receiver implements Runnable {
         this.listen_port = listen_port;
         this.host_addr = host_addr;
         backlog=1;
-        client_map=new HashMap<>();
+        client_map=new ConcurrentHashMap<>();
         socket = new DatagramSocket(listen_port);// 监听端口
     }
 
@@ -51,14 +64,16 @@ public class Receiver implements Runnable {
 
     @Override
     public void run() {
+        dealWithOverTime();
         byte[] data_arriving = new byte[2880];
         DatagramPacket data_packet = new DatagramPacket(data_arriving, data_arriving.length);
+        ClientAddr addr=new ClientAddr();
         while (true){
             try {
                 socket.receive(data_packet);
                 InetAddress dest = data_packet.getAddress();
                 int targetPort=data_packet.getPort();
-                ClientAddr addr=new ClientAddr(dest,targetPort);
+                addr.update(dest,targetPort);
                 ReceiveWindow window;
 
                 
@@ -69,13 +84,12 @@ public class Receiver implements Runnable {
                 }else{
                     // 该客户端的连接不存在,新建一个窗口
                     window=new ReceiveWindow();
-                    client_map.put(addr,window);
+                    client_map.put(new ClientAddr(addr),window);
                 }
 
                 Packet recvPacket = (Packet) new ObjectInputStream(new ByteArrayInputStream(data_packet.getData())).readObject();
                 if(recvPacket.getCheckSum()==recvPacket.calcCheckSum()){
                     int seq=window.addRecvPacket(recvPacket);
-                    // todo:发送ack
                     Packet packet=new Packet(null,seq);
                     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                     ObjectOutputStream os;
@@ -94,6 +108,23 @@ public class Receiver implements Runnable {
             }
         }
 
+
+    }
+
+    public void dealWithOverTime(){
+        TimerTask dealOverTime = new TimerTask() {
+            @Override
+            public void run() {
+                Iterator it=client_map.entrySet().iterator();
+                while(it.hasNext()){
+                    Map.Entry<ClientAddr,ReceiveWindow> entry=(Map.Entry<ClientAddr,ReceiveWindow>)it.next();
+                    if(entry.getValue().checkIsOverTime()){
+                        it.remove();
+                    }
+                }
+            }
+        };
+        new Timer().schedule(dealOverTime, 1000, 5000);
 
     }
 }

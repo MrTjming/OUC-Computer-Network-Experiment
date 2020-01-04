@@ -63,7 +63,7 @@ public class SendWindow {
 
 	int ssthresh = 16; // 慢开始的门限
 	final private static int MAX_Duplicate_NUM = 3;
-	final private static int MAX_Window_Size = 100;
+	final private static int MAX_Window_Size = Integer.MAX_VALUE;
 
 	public boolean continueSend(){
 		return ackWindowIndex<this.endWindosIndex;

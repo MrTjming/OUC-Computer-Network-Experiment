@@ -50,7 +50,7 @@ public class SendWindow {
 		}
 	}
 
-	public static long TIMEOUTTIME = 5000;// 超时时间
+	public static long TIMEOUTTIME = 3000;// 超时时间
 	Logger logger;
 	List<Window> sendContent;
 	int startWindowIndex; // 窗口头

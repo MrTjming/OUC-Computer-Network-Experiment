@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="TCP_Test_2019" target="6" />
+      <module name="TCP_Test_2019" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

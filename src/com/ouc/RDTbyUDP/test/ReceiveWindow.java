@@ -14,8 +14,11 @@ public class ReceiveWindow {
 	int lastLength=0;
 	boolean completed=false;
 	Map<Integer,Integer> indexMap;
+	long lastConnectTime;
+	public static final long MAX_WAIT_TIME=30_000;
 	public ReceiveWindow() {
 		initLogger();
+		lastConnectTime=System.currentTimeMillis();
 		indexMap=new HashMap<>();
 		contentList=new LinkedList<>();
 
@@ -57,8 +60,19 @@ public class ReceiveWindow {
 		logger.addHandler(fh);
 	}
 
+	// 更新上次连接时间
+	public void updateLastConnectTime(){
+		lastConnectTime=System.currentTimeMillis();
+	}
+
+	// 检测是否超时
+	public boolean checkIsOverTime(){
+		return (System.currentTimeMillis()-this.lastConnectTime>=MAX_WAIT_TIME);
+	}
+
 
 	public int addRecvPacket(Packet packet){
+		updateLastConnectTime();
 		int seq=packet.getSequenceNumber();
 		if(seq==recvBase+lastLength||recvBase==-1){
 			recvBase=seq;
